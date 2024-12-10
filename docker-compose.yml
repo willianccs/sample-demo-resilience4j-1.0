@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   resilience4j-demo:
@@ -12,6 +12,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - backend-network
+    restart: always
 
   tester:
     image: alpine
@@ -37,21 +38,41 @@ services:
           curl -s http://resilience4j-demo:9080/backendA/success;
         done
       "
+    restart: always
 
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    network_mode: "host"
+    depends_on:
+      - resilience4j-demo
+    ports:
+      - 9090:9090
     volumes:
-      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - backend-network
 
   grafana:
-    image: grafana/grafana
     container_name: grafana
-    network_mode: "host"
+    image: grafana/grafana
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
     env_file:
-      - ./docker/grafana.env
+      - ./docker/grafana/grafana.env
+    networks:
+      - backend-network
 
 networks:
   backend-network:
     driver: bridge
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}

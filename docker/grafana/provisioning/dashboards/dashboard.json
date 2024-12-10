@@ -18,9 +18,10 @@
   "description": "Resilience4j Metrics",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 1,
   "links": [],
+  "liveNow": true,
   "panels": [
     {
       "collapsed": false,
@@ -38,7 +39,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -119,7 +120,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -200,7 +201,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "",
       "fieldConfig": {
@@ -302,7 +303,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -397,7 +398,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "",
       "fieldConfig": {
@@ -490,7 +491,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -843,7 +844,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -975,7 +976,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -1205,7 +1206,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -1466,7 +1467,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ae6ca1fbwazuof"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -1756,7 +1757,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ae6ca1fbwazuof"
+            "uid": "PBFA97CFB590B2093"
           },
           "fieldConfig": {
             "defaults": {
@@ -1801,8 +1802,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1982,6 +1982,6 @@
   "timezone": "",
   "title": "Resilience4j",
   "uid": "DshZ5zmWk",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }

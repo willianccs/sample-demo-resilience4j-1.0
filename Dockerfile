@@ -7,7 +7,8 @@ WORKDIR /app
 # Compilar o projeto sem testes
 RUN chmod +x ./gradlew && \
     ./gradlew --version && \
-    ./gradlew clean build -x test
+    ./gradlew bootJar && \
+    mv build/libs/app.jar /app/app.jar
 
 # Executar a aplicação
-CMD ["./gradlew", "bootRun"]
+CMD ["java", "-jar", "/app/app.jar"]
