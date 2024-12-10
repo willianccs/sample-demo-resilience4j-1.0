@@ -1,14 +1,57 @@
-version: '3'
+version: '3.8'
+
 services:
+  resilience4j-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    ports:
+      - "9080:9080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - backend-network
+
+  tester:
+    image: alpine
+    networks:
+      - backend-network
+    depends_on:
+      - resilience4j-demo
+    command: >
+      sh -c "
+        apk add --no-cache curl &&
+        echo 'Simulando Sucesso' &&
+        curl -s http://resilience4j-demo:9080/backendA/success &&
+        echo 'Simulando Falhas' &&
+        for i in 1 2 3 4; do
+          curl -s http://resilience4j-demo:9080/backendA/failure;
+        done &&
+        echo 'Verificando Eventos' &&
+        curl -s http://resilience4j-demo:9080/actuator/circuitbreakerevents &&
+        echo 'Testando Fallback' &&
+        curl -s http://resilience4j-demo:9080/backendA/fallback &&
+        echo 'Retornando ao Estado Fechado' &&
+        for i in 1 2 3; do
+          curl -s http://resilience4j-demo:9080/backendA/success;
+        done
+      "
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     network_mode: "host"
     volumes:
       - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+
   grafana:
     image: grafana/grafana
     container_name: grafana
     network_mode: "host"
     env_file:
       - ./docker/grafana.env
+
+networks:
+  backend-network:
+    driver: bridge

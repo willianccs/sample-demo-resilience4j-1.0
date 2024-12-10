@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.8.RELEASE'
+		springBootVersion = '2.6.0'
 	}
 	repositories {
 		mavenCentral()
@@ -11,14 +11,14 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 1.8
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 repositories {
-	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+	maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     mavenCentral()
 	//mavenLocal()
 
@@ -28,17 +28,18 @@ configurations.all {
 }
 
 ext{
-	resilience4jVersion = '1.0.0'
+	resilience4jVersion = '1.7.0'
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-webflux')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-aop')
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 
-	compile("io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}")
-	compile("io.micrometer:micrometer-registry-prometheus")
-	
-	compile("io.vavr:vavr-jackson:0.10.0")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    implementation "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
+    implementation "io.micrometer:micrometer-registry-prometheus"
+
+    implementation 'io.vavr:vavr-jackson:0.10.3'
+	testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
